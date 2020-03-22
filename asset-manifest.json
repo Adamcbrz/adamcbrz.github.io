@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/adamcbrz.github.io/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/adamcbrz.github.io/static/js/main.c0eb447b.chunk.js",
+    "main.js.map": "/adamcbrz.github.io/static/js/main.c0eb447b.chunk.js.map",
+    "runtime-main.js": "/adamcbrz.github.io/static/js/runtime-main.e64fc1f7.js",
+    "runtime-main.js.map": "/adamcbrz.github.io/static/js/runtime-main.e64fc1f7.js.map",
+    "static/js/2.0effca6a.chunk.js": "/adamcbrz.github.io/static/js/2.0effca6a.chunk.js",
+    "static/js/2.0effca6a.chunk.js.map": "/adamcbrz.github.io/static/js/2.0effca6a.chunk.js.map",
+    "index.html": "/adamcbrz.github.io/index.html",
+    "precache-manifest.a546279dfc5f38f0c8bb2ae90414a0fa.js": "/adamcbrz.github.io/precache-manifest.a546279dfc5f38f0c8bb2ae90414a0fa.js",
+    "service-worker.js": "/adamcbrz.github.io/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/adamcbrz.github.io/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.0effca6a.chunk.js.LICENSE.txt": "/adamcbrz.github.io/static/js/2.0effca6a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e64fc1f7.js",
+    "static/js/2.0effca6a.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.c0eb447b.chunk.js"
+  ]
+}
