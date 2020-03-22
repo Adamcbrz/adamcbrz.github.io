@@ -1,5 +1,5 @@
 {
-  "homepage": "https:/adamcbrz.github.io",
+  "homepage": "https://adamcbrz.github.io",
   "name": "website",
   "version": "0.1.0",
   "private": true,
@@ -26,6 +26,7 @@
   },
   "scripts": {
     "start": "react-scripts start --no-cache ",
+    "build:prod": "react-scripts build --production",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "predeploy": "npm run build",
