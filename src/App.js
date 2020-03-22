@@ -53,6 +53,7 @@ class App extends Component {
 		const fileSystem = FileSystem.create({
 			'/README': {
 				content:
+					'\n' +
 					' █████╗ ██████╗  █████╗ ███╗   ███╗    ██████╗ ██████╗ ███████╗ ██████╗ ███████╗ ██████╗ ██╗    ██╗███████╗██╗  ██╗██╗\n' +
 					'██╔══██╗██╔══██╗██╔══██╗████╗ ████║    ██╔══██╗██╔══██╗╚══███╔╝██╔═══██╗╚══███╔╝██╔═══██╗██║    ██║██╔════╝██║ ██╔╝██║\n' +
 					'███████║██║  ██║███████║██╔████╔██║    ██████╔╝██████╔╝  ███╔╝ ██║   ██║  ███╔╝ ██║   ██║██║ █╗ ██║███████╗█████╔╝ ██║\n' +
@@ -88,7 +89,7 @@ class App extends Component {
 					'         ░ ░ ░      ░    ░  \n' +
 					'           ░ ░              \n\n' +
 					'"Nyx" was a game I worked on to be launched with the GearVR. It was a space shooter\n' +
-					'on rails. Working with the design to produce a level build and gameplay.\n'
+					'on rails. Working with the design to produce a level build and gameplay.\n\n'
 			},
 			'/games/pants': {
 				content:
@@ -103,7 +104,7 @@ class App extends Component {
 					'                                                         \n' +
 					'"Pants!: Don\'t Die Naked" was a game I did all of the programming on. It was a \n' +
 					'simple game in the vein of flappy birds. This a fun project that allowed us to\n' +
-					'published on three different platforms.\n'
+					'published on three different platforms.\n\n'
 
 			},
 			'/games/deliver-it': {
@@ -116,7 +117,7 @@ class App extends Component {
 					'                                                              \n' +
 					'"Deliver It" is a driving game similar to Smuggle Truck used as training game.\n' +
 					'The game included humorous descriptions to assist in the training of users.\n' +
-					"The game consist of a delivery truck that takes a load to the next stop.\n",
+					"The game consist of a delivery truck that takes a load to the next stop.\n\n",
 			},
 			'/games/rockpocalpse': {
 				content:
@@ -128,7 +129,7 @@ class App extends Component {
 					'                  |_|               |___|_|          \n' +
 					'\n' +
 					'"Rockpocolypse" was a game we teamed up with Dwayne "The Rock" Johnson to create a fighting game.\n' +
-					'It was focused on mechanim animation system along with doing some custom UI controls and transitions.'
+					'It was focused on mechanim animation system along with doing some custom UI controls and transitions.\n\n'
 			},
 			'/games/luma-link': {
 				content:
@@ -147,11 +148,11 @@ class App extends Component {
 				content:
 					' __ __    ___   ____   ____  ____    ___      ______   ____  _        ___  _____\n' +
 					'|  |  |  /  _] /    | /    ||    |  /  _]    |      | /    || |      /  _]/ ___/\n' +
-					'|  |  | /  [_ |   __||   __| |  |  /  [_     |      ||  o  || |     /  [_(   \_ \n' +
-					'|  |  ||    _]|  |  ||  |  | |  | |    _]    |_|  |_||     || |___ |    _]\__  |\n' +
-					'|  :  ||   [_ |  |_ ||  |_ | |  | |   [_       |  |  |  _  ||     ||   [_ /  \ |\n' +
-					' \   / |     ||     ||     | |  | |     |      |  |  |  |  ||     ||     |\    |\n' +
-					'  \_/  |_____||___,_||___,_||____||_____|      |__|  |__|__||_____||_____| \___|\n' +
+					'|  |  | /  [_ |   __||   __| |  |  /  [_     |      ||  o  || |     /  [_(   \\_ \n' +
+					'|  |  ||    _]|  |  ||  |  | |  | |    _]    |_|  |_||     || |___ |    _]\\__  |\n' +
+					'|  :  ||   [_ |  |_ ||  |_ | |  | |   [_       |  |  |  _  ||     ||   [_ /  \\ |\n' +
+					' \\   / |     ||     ||     | |  | |     |      |  |  |  |  ||     ||     |\\    |\n' +
+					'  \\_/  |_____||___,_||___,_||____||_____|      |__|  |__|__||_____||_____| \\___|\n' +
 					'\n' +
 					'"Veggie Tales: League Of Incredible Vegetables" was a combat strategy game were you controlled\n' +
 					'the veggie tales characters. I handled on the development for combat and UI.\n\n'
@@ -242,7 +243,7 @@ class App extends Component {
 					return {
 						output: OutputFactory.makeTextOutput(
 							'Commands\n==================================\n\n' +
-							'cat:           Print file content\n\n' +
+							'cat, print:    Print file content\n\n' +
 							'cd:            Change directory\n\n' +
 							'help:          Display the list of commands\n\n' +
 							'ls:            List directory\n\n' +
@@ -255,6 +256,7 @@ class App extends Component {
 				},
 				optDef: {}
 			},
+
 			list: {
 				function: (state, opts) => {
 					console.log(state);
@@ -330,57 +332,6 @@ class App extends Component {
 							'Command not found!\n\nSuggestion: print skills\n\n'
 						)
 					};
-				},
-				optDef: {}
-			},
-			open: {
-				function: (state, opts) => {
-					let path = state.getEnvVariables().get('cwd');
-					let filePath = path;
-					console.log(filePath);
-					if (opts[0]) {
-						if (opts[0].charAt(0) === '/') {
-							filePath = opts[0];
-						} else {
-							if (filePath === '/') {
-								filePath = '/' + opts[0];
-							} else {
-								filePath += '/' + opts[0];
-							}
-						}
-					}
-					console.log(filePath);
-					let { link } = state
-						.getFileSystem()
-						.get(filePath)
-						.toJS();
-
-					// let files =
-					// 	state._immutable._root.entries[0][1]._root.entries;
-					// let url = null;
-					// console.log(files);
-					// for (var i = 0; i < files.length; i++) {
-					// 	console.log(files[i][0] + ' : ' + filePath);
-					// 	if (files[i][0] === filePath) {
-					// 		url = files[i][1]._root.entries[0][1];
-					// 		break;
-					// 	}
-					// }
-
-					if (link != null) {
-						window.open(link, '_blank');
-						return {
-							output: OutputFactory.makeTextOutput(
-								'Opening Website: ' + link + '\n\n'
-							)
-						};
-					} else {
-						return {
-							output: OutputFactory.makeTextOutput(
-								'Nothing to open \n\n'
-							)
-						};
-					}
 				},
 				optDef: {}
 			}
