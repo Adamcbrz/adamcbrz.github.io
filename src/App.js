@@ -1,3 +1,4 @@
+//import asciifyImage from "asciify-image";
 import figlet from 'figlet';
 import ANSI_Shadow from 'figlet/importable-fonts/ANSI Shadow';
 import {
@@ -8,17 +9,47 @@ import {
 	OutputFactory
 } from 'javascript-terminal';
 import React, { Component } from 'react';
+//import AsciiImage from './AsciiImage';
 //import ReactTerminal from 'ReactTerminal';
 //import { ReactTerminal, EmulatorState, FileSystem, ReactThemes } from 'react-terminal-component';
-import { ReactTerminalStateless, ReactThemes } from 'react-terminal-component';
+import { ReactOutputRenderers, ReactTerminalStateless, ReactThemes } from 'react-terminal-component';
 //import { hasDirectory } from 'fs/operations/directory-operations';
 
 figlet.parseFont('ANSI_Shadow', ANSI_Shadow);
 
+
+//const PAPER_TYPE = 'paper';
+
+// const paperStyles = {
+//   backgroundColor: 'white',
+//   color: 'black',
+//   fontFamily: 'sans-serif',
+//   padding: '1em',
+//   margin: '1em 0',
+//   borderRadius: '0.2em'
+// };
+/*
+const PaperOutput = ({ content }) => (
+	<>
+	{content.title}
+  <AsciiImage url='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png' animated='false'	 />
+  </>
+);
+
+const createPaperRecord = (title, body) => {
+  return new OutputFactory.OutputRecord({
+    type: PAPER_TYPE,
+    content: {
+      title,
+      body
+    }
+  });
+};*/
+
 class App extends Component {
 	constructor() {
 		super();
-
+		
 		const fileSystem = FileSystem.create({
 			'/README': {
 				content:
@@ -28,7 +59,7 @@ class App extends Component {
 					'██╔══██║██║  ██║██╔══██║██║╚██╔╝██║    ██╔══██╗██╔══██╗ ███╔╝  ██║   ██║ ███╔╝  ██║   ██║██║███╗██║╚════██║██╔═██╗ ██║\n' +
 					'██║  ██║██████╔╝██║  ██║██║ ╚═╝ ██║    ██████╔╝██║  ██║███████╗╚██████╔╝███████╗╚██████╔╝╚███╔███╔╝███████║██║  ██╗██║\n' +
 					'╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚══════╝ ╚═════╝  ╚══╝╚══╝ ╚══════╝╚═╝  ╚═╝╚═╝\n' +
-					'Welcome to my website. This is a fun experiement to\n' +
+					'Welcome to my website. This is a fun experiment to\n' +
 					"showcase my portfolio and stuff I have done.\n\nType 'help' in the console for a list of commands\nType 'ls' to list the directory\n\n"
 			},
 			'/skills': {
@@ -48,12 +79,14 @@ class App extends Component {
 			'/games/pants': {},
 			'/games/deliver-it': {
 				content:
-					'Deliver It is a driving game similar to Smuggle Truck used as training game.\nThe game included humorous descriptions to assist in the training of users.\n' +
+				'  ________     __________                        ____________ \n' +
+				'  ___  __ \\_______  /__(_)__   ______________    ____  _/_  /_\n' +
+				'  __  / / /  _ \\_  /__  /__ | / /  _ \\_  ___/     __  / _  __/\n' +
+				'  _  /_/ //  __/  / _  / __ |/ //  __/  /        __/ /  / /_  \n' +
+				'  /_____/ \\___//_/  /_/  _____/ \\___//_/         /___/  \\__/  \n' +
+				'                                                              \n' +
+					'"Deliver It" is a driving game similar to Smuggle Truck used as training game.\nThe game included humorous descriptions to assist in the training of users.\n' +
 					"The game consist of a delivery truck that takes a load to the next stop.\nimage ref: <a href='http://adambrz.com/images/game_deliver_it.png'>image</a>",
-				htmlContent: {
-					title: 'Deliver-It',
-					body: '/game_deliver_it.png'
-				}
 			},
 			'/games/rockpocalpse': {},
 			'/games/luma-link': {},
@@ -114,7 +147,7 @@ class App extends Component {
 				function: (state, opts) => {
 					let path = state.getEnvVariables().get('cwd');
 					let filePath = path;
-					console.log(filePath);
+					//console.log(filePath);
 					if (opts[0]) {
 						if (opts[0].charAt(0) === '/') {
 							filePath = opts[0];
@@ -126,27 +159,25 @@ class App extends Component {
 							}
 						}
 					}
-					console.log(filePath);
-					let { content, htmlContent } = state
-						.getFileSystem()
-						.get(filePath)
-						.toJS();
+					let fs = state.getFileSystem();
+					let file = fs.get(filePath);
+					let js = file.toJS() || {};
+
+					let { content, htmlContent } = js;
 
 					if (htmlContent) {
 						console.log(htmlContent);
 						let title = figlet.textSync(htmlContent.title, {
 							font: 'ANSI_Shadow'
 						});
+						
 
 						console.log(title);
-						return {
-							output: ['test', 'test2'] //OutputFactory.makeTextOutput(title) // createPaperRecord(title, htmlContent.body)
-						};
-
-						// return {
-						// 	output: createPaperRecord(title, htmlContent.body)
+						//  return {
+						//  	output: createPaperRecord(title, htmlContent.body)
 						// };
 					} else if (content) {
+						console.log(content);
 						return {
 							output: OutputFactory.makeTextOutput(content)
 						};
@@ -250,7 +281,8 @@ class App extends Component {
 		// 	console.log(err);
 		// 	console.log(results);
 		// });
-
+		
+		
 		return (
 			<div>
 				<ReactTerminalStateless
@@ -258,6 +290,10 @@ class App extends Component {
 					inputStr={this.state.inputStr}
 					emulatorState={this.state.emulatorState}
 					theme={ReactThemes.hacker}
+					// outputRenderers={{
+					// 	...ReactOutputRenderers,
+					// 	[PAPER_TYPE]: PaperOutput
+					//   }}
 					onInputChange={inputStr => this.setState({ inputStr })}
 					onStateChange={emulatorState => {
 						this.setState({
