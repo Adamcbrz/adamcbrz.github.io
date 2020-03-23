@@ -256,17 +256,6 @@ class App extends Component {
 				},
 				optDef: {}
 			},
-
-			list: {
-				function: (state, opts) => {
-					console.log(state);
-					console.log('history');
-					console.log(state.GetHistory());
-
-					return { output: OutputFactory.makeTextOutput('done') };
-				},
-				optDef: {}
-			},
 			print: {
 				function: (state, opts) => {
 					let path = state.getEnvVariables().get('cwd');
