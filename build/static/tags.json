@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "mac": "AA:AA:AA:AA:AA",
+        "min_rssi": -21.0,
+        "max_rssi": -80.2,
+        "name": "Tag_C1"
+    }
+]
